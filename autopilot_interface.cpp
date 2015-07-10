@@ -349,6 +349,7 @@ read_messages()
 				{
 					//printf("MAVLINK_MSG_ID_ATTITUDE\n");
 					mavlink_msg_attitude_decode(&message, &(current_messages.attitude));
+					G_mavlink_attitude = current_messages.attitude;
 					current_messages.time_stamps.attitude = get_time_usec();
 					this_timestamps.attitude = current_messages.time_stamps.attitude;
 					break;
@@ -363,7 +364,7 @@ read_messages()
 
 			} // end: switch msgid
 
-		G_current_messages = current_messages;
+		
 		} // end: if read message
 
 		// Check for receipt of all items

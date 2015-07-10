@@ -56,7 +56,7 @@
 #include "mavlink_control.h"
 
 
-extern "C" Mavlink_Messages G_current_messages;
+extern "C" mavlink_attitude_t G_mavlink_attitude;
 // ------------------------------------------------------------------------------
 //   TOP
 // ------------------------------------------------------------------------------
