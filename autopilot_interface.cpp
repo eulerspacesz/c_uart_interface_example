@@ -230,7 +230,7 @@ update_setpoint(mavlink_set_position_target_local_ned_t setpoint)
 // ------------------------------------------------------------------------------
 //   Read Messages
 // ------------------------------------------------------------------------------
-extern Mavlink_Messages G_current_messages;
+extern mavlink_attitude_t G_mavlink_attitude;
 
 void
 Autopilot_Interface::
