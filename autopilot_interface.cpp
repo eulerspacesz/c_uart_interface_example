@@ -361,6 +361,7 @@ read_messages()
 
 			} // end: switch msgid
 
+		G_current_messages = current_messages;
 		} // end: if read message
 
 		// Check for receipt of all items

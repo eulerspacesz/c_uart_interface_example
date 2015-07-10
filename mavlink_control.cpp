@@ -70,7 +70,7 @@ top (int argc, char **argv)
 	// --------------------------------------------------------------------------
 
 	// Default input arguments
-	char *uart_name = (char*)"/dev/ttyUSB0";
+	char *uart_name = (char*)"/dev/ttyMFD1";
 	int baudrate = 57600;
 
 	// do the parse, will throw an int if it fails
@@ -173,7 +173,7 @@ commands(Autopilot_Interface &api)
 	// --------------------------------------------------------------------------
 	//   START OFFBOARD MODE
 	// --------------------------------------------------------------------------
-
+/*
 	api.enable_offboard_control();
 	usleep(100); // give some time to let it sink in
 
@@ -229,7 +229,7 @@ commands(Autopilot_Interface &api)
 	// --------------------------------------------------------------------------
 
 	api.disable_offboard_control();
-
+*/
 	// now pixhawk isn't listening to setpoint commands
 
 
