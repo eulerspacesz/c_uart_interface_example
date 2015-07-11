@@ -56,23 +56,31 @@
 #include "mavlink_control.h"
 
 
-extern "C" mavlink_attitude_t G_mavlink_attitude;
+mavlink_attitude_t *G_mavlink_attitude;
 // ------------------------------------------------------------------------------
 //   TOP
 // ------------------------------------------------------------------------------
-extern "C" int top (int argc, char **argv);
+extern "C" int top (mavlink_attitude_t *mavlink_attitude_gokit);
+
+char *uart_name = (char*)"/dev/ttyMFD1";
+int baudrate = 57600;
+Serial_Port serial_port(uart_name, baudrate);
+Autopilot_Interface autopilot_interface(&serial_port);
+
 
 int
-top (int argc, char **argv)
+top (mavlink_attitude_t *mavlink_attitude_gokit)
 {
 
 	// --------------------------------------------------------------------------
 	//   PARSE THE COMMANDS
 	// --------------------------------------------------------------------------
+	int argc;
+    char **argv;
 
 	// Default input arguments
-	char *uart_name = (char*)"/dev/ttyMFD1";
-	int baudrate = 57600;
+//	char *uart_name = (char*)"/dev/ttyMFD1";
+//	int baudrate = 57600;
 
 	// do the parse, will throw an int if it fails
 	parse_commandline(argc, argv, uart_name, baudrate);
@@ -92,7 +100,7 @@ top (int argc, char **argv)
 	 * pthread mutex lock.
 	 *
 	 */
-	Serial_Port serial_port(uart_name, baudrate);
+//	Serial_Port serial_port(uart_name, baudrate);
 
 
 	/*
@@ -110,7 +118,7 @@ top (int argc, char **argv)
 	 * otherwise the vehicle will go into failsafe.
 	 *
 	 */
-	Autopilot_Interface autopilot_interface(&serial_port);
+//	Autopilot_Interface autopilot_interface(&serial_port);
 
 	/*
 	 * Setup interrupt signal handler
@@ -139,7 +147,7 @@ top (int argc, char **argv)
 	/*
 	 * Now we can implement the algorithm we want on top of the autopilot interface
 	 */
-	commands(autopilot_interface);
+//	commands(autopilot_interface);
 
 
 	// --------------------------------------------------------------------------
@@ -149,8 +157,8 @@ top (int argc, char **argv)
 	/*
 	 * Now that we are done we can stop the threads and close the port
 	 */
-	autopilot_interface.stop();
-	serial_port.stop();
+//	autopilot_interface.stop();
+//	serial_port.stop();
 
 
 	// --------------------------------------------------------------------------

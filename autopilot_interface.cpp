@@ -230,7 +230,7 @@ update_setpoint(mavlink_set_position_target_local_ned_t setpoint)
 // ------------------------------------------------------------------------------
 //   Read Messages
 // ------------------------------------------------------------------------------
-extern mavlink_attitude_t G_mavlink_attitude;
+extern mavlink_attitude_t *G_mavlink_attitude;
 
 void
 Autopilot_Interface::
@@ -349,7 +349,7 @@ read_messages()
 				{
 					//printf("MAVLINK_MSG_ID_ATTITUDE\n");
 					mavlink_msg_attitude_decode(&message, &(current_messages.attitude));
-					G_mavlink_attitude = current_messages.attitude;
+					memcpy(G_mavlink_attitude,&current_messages.attitude,28);
 					current_messages.time_stamps.attitude = get_time_usec();
 					this_timestamps.attitude = current_messages.time_stamps.attitude;
 					break;
